@@ -19,12 +19,13 @@ public class Abfrage {
 	// TODO: OBJECT_MAPPER von aussen injecten
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
+	// TODO: Values per Parameter hineinreichen
 	@GET
 	@Path("hello")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHello() {
 		Bean bean = new Bean();
-		bean.setA("Hello World");
+		bean.setSatz("Hello World");
 		LOGGER.debug("getHello() was called and returned a bean");
 		return createJsonString(bean);
 	}
