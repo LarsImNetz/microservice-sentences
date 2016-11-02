@@ -22,9 +22,10 @@
 	
 	<groupId>org.lla-private</groupId>
 	<artifactId>sentences</artifactId>
-	<packaging>pom</packaging>
 	<version>1.0-SNAPSHOT</version>
+
 	<name>Rest-Service</name>
+	<packaging>pom</packaging>
 
 	<modules>
 		<module>bean</module>

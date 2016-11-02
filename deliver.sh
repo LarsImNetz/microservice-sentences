@@ -1,1 +1,1 @@
-L deliver server/target/restbeanserver.war to moon64 with $USER
+L deliver server/target/sentencesrestbeanserver.war to moon64 with $USER
