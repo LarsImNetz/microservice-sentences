@@ -14,7 +14,7 @@ public class TestBean {
 	@Test
 	public void testSerializeBaugeldAntrag() {
 		Bean bean = new Bean();
-		bean.setA("Aber ein A");
+		bean.setSatz("Aber ein A");
 
 		final Serializable original = bean;
 		final Serializable copy = SerializationUtils.clone(original);
@@ -22,17 +22,15 @@ public class TestBean {
 		Assert.assertEquals(original, copy);
 
 		Bean copyOfBean = (Bean) copy;
-		Assert.assertEquals("Aber ein A", copyOfBean.getA());
+		Assert.assertEquals("Aebr ein A", copyOfBean.getSatz());
 	}
 
 	@Test
 	public void testJsonBean() throws Exception {
 		Bean bean = new Bean();
-		bean.setA("Aber ein A");
-		bean.setC(1234);
+		bean.setSatz("Aber ein A");
 
 		final String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(bean);
-		JSONAssert.assertEquals("{'a': 'Aber ein A', 'b': null, 'c': 1234}", json, false);
-
+		JSONAssert.assertEquals("{'satz': 'Aebr ein A'}", json, false);
 	}
 }

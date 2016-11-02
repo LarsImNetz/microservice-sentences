@@ -2,50 +2,30 @@ package org.lla_private.bean;
 
 import java.io.Serializable;
 
+import text.SatzDreher;
+
 @SuppressWarnings("serial")
 public class Bean implements Serializable {
 
-	String a;
-	String b;
-	Integer c;
+	// TODO: sollte jetzt Sentences nutzen können
+	String satz;
 
-	public String getA() {
-		return a;
+	public String getSatz() {
+		SatzDreher dreher = new SatzDreher(satz);
+		return dreher.getVerdrehtenSatz();
 	}
 
-	public void setA(String a) {
-		this.a = a;
+	public void setSatz(String a) {
+		this.satz = a;
 	}
 
-	public String getB() {
-		return b;
-	}
 
-	public void setB(String b) {
-		this.b = b;
-	}
-
-	public Integer getC() {
-		return c;
-	}
-
-	public void setC(Integer c) {
-		this.c = c;
-	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((a == null)
-				? 0
-				: a.hashCode());
-		result = prime * result + ((b == null)
-				? 0
-				: b.hashCode());
-		result = prime * result + ((c == null)
-				? 0
-				: c.hashCode());
+		result = prime * result + ((satz == null) ? 0 : satz.hashCode());
 		return result;
 	}
 
@@ -58,30 +38,17 @@ public class Bean implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Bean other = (Bean) obj;
-		if (a == null) {
-			if (other.a != null)
+		if (satz == null) {
+			if (other.satz != null)
 				return false;
-		}
-		else if (!a.equals(other.a))
-			return false;
-		if (b == null) {
-			if (other.b != null)
-				return false;
-		}
-		else if (!b.equals(other.b))
-			return false;
-		if (c == null) {
-			if (other.c != null)
-				return false;
-		}
-		else if (!c.equals(other.c))
+		} else if (!satz.equals(other.satz))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Bean [a=" + a + ", b=" + b + ", c=" + c + "]";
+		return "Bean [a=" + satz + "]";
 	}
 
 }
