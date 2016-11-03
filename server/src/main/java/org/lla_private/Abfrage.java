@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
 @Path("/abfrage")
 public class Abfrage {
 
@@ -22,14 +21,14 @@ public class Abfrage {
 	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
 	// TODO: Values per Parameter hineinreichen
-	//http://server/abfrage/hello
+	//http://server/abfrage/hello?sentence=Hello%20World
 	@GET
 	@Path("hello")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHello(@QueryParam("sentence") final String satz) {
 		Bean bean = new Bean();
 		bean.setSatz(satz);
-		LOGGER.debug("getHello() was called with parameter '" +satz+ "' and returned a bean");
+		LOGGER.debug("getHello() was called with parameter '" + satz + "' and returned a bean");
 		return createJsonString(bean);
 	}
 
