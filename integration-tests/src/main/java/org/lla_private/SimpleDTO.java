@@ -2,8 +2,7 @@ package org.lla_private;
 
 import java.time.LocalDate;
 
-// -------------------------------------------------------------
-final class SimpleDTO {
+class SimpleDTO {
 
 	private String vorname;
 	private String nachname;
