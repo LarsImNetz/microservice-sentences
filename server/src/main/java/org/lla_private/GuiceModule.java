@@ -5,13 +5,13 @@ import javax.inject.Singleton;
 import org.lla_private.service.satzdreher.ISatzDreherService;
 import org.lla_private.service.satzdreher.SatzDreherService;
 
-import com.google.inject.Binder;
-import com.google.inject.Module;
+import com.google.inject.AbstractModule;
 
+public class GuiceModule extends AbstractModule {
 
-public class GuiceModule implements Module {
-  @Override
-  public void configure(Binder binder) {
-      binder.bind(ISatzDreherService.class).to(SatzDreherService.class).in(Singleton.class);
-  }
+	@Override
+	protected void configure() {
+		bind(ISatzDreherService.class).to(SatzDreherService.class).in(Singleton.class);
+	}
+	
 }
