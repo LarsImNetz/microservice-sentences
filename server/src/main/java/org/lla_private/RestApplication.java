@@ -4,28 +4,42 @@ import java.util.HashSet;
 import java.util.Set;
 // import java.util.Timer;
 
+import javax.inject.Inject;
+import javax.ws.rs.ApplicationPath;
 import javax.ws.rs.core.Application;
 
+import org.glassfish.hk2.api.ServiceLocator;
+import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
+import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
+import org.lla_private.rest.Abfrage;
+
+import com.google.inject.Guice;
+
+@ApplicationPath("/")
 public class RestApplication extends Application {
 
-	// Alle 15 Minuten wird das Postfach auf neue Mails geprueft
-//	private static final long CHECK_FOR_NEW_REPORTING_INTERVAL = 15 * 60 * 1000;
+	 @Inject
+	public RestApplication(ServiceLocator serviceLocator) {
+		 GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
 
-	public RestApplication() {
-//		startCheckForNewMailTask();
+     GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
+     guiceBridge.bridgeGuiceInjector(Guice.createInjector(new GuiceModule()));
 	}
-
-//	private void startCheckForNewMailTask() {
-//		final Timer timer = new Timer();
-//		timer.scheduleAtFixedRate(new org.lla_private.task.CheckForNewMailTask(), 0, CHECK_FOR_NEW_REPORTING_INTERVAL);
-//	}
 
 	@Override
 	public Set<Class<?>> getClasses() {
-		final Set<Class<?>> classes = new HashSet<Class<?>>();
+		final Set<Class<?>> classes = new HashSet<>();
 
 		classes.add(Abfrage.class);
 
 		return classes;
 	}
+	
+//	@Override
+//	public Set<Object> getSingletons() {
+//		final Set<Object> singletons = new HashSet<>();
+//		
+//		singletons.add(new SatzDreherModule());
+//		return singletons;
+//	}
 }

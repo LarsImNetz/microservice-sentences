@@ -2,8 +2,6 @@ package org.lla_private.bean;
 
 import java.io.Serializable;
 
-import text.SatzDreher;
-
 @SuppressWarnings("serial")
 public class Bean implements Serializable {
 
@@ -11,8 +9,7 @@ public class Bean implements Serializable {
 	String satz;
 
 	public String getSatz() {
-		SatzDreher dreher = new SatzDreher(satz);
-		return dreher.getVerdrehtenSatz();
+		return satz;
 	}
 
 	public void setSatz(String a) {
