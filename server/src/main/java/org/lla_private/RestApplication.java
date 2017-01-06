@@ -18,12 +18,12 @@ import com.google.inject.Guice;
 @ApplicationPath("/")
 public class RestApplication extends Application {
 
-	 @Inject
+	@Inject
 	public RestApplication(ServiceLocator serviceLocator) {
-		 GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
+		GuiceBridge.getGuiceBridge().initializeGuiceBridge(serviceLocator);
 
-     GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
-     guiceBridge.bridgeGuiceInjector(Guice.createInjector(new GuiceModule()));
+		GuiceIntoHK2Bridge guiceBridge = serviceLocator.getService(GuiceIntoHK2Bridge.class);
+		guiceBridge.bridgeGuiceInjector(Guice.createInjector(new GuiceModule()));
 	}
 
 	@Override
@@ -34,12 +34,12 @@ public class RestApplication extends Application {
 
 		return classes;
 	}
-	
-//	@Override
-//	public Set<Object> getSingletons() {
-//		final Set<Object> singletons = new HashSet<>();
-//		
-//		singletons.add(new SatzDreherModule());
-//		return singletons;
-//	}
+
+	// @Override
+	// public Set<Object> getSingletons() {
+	// final Set<Object> singletons = new HashSet<>();
+	//
+	// singletons.add(new SatzDreherModule());
+	// return singletons;
+	// }
 }
