@@ -22,6 +22,7 @@ public class ObjectMapperService implements IObjectMapperService {
 	 *  @return json string oder ""
 	 */
 	public String createJsonString(final Object list) {
+	//TODO: Irgendwo habe ich auch das gegenstück, muss hier mit rein 
 		String jsonString = "";
 		try {
 			jsonString = OBJECT_MAPPER.writer().writeValueAsString(list);
