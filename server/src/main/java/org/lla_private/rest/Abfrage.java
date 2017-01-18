@@ -12,23 +12,25 @@ import org.lla_private.service.satzdreher.ISatzDreherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Path("/abfrage")
 public class Abfrage {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(Abfrage.class);
 
-	// TODO: OBJECT_MAPPER von aussen injecten
-	private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
+	private final IObjectMapperService objectMapperService;
 
 	private final ISatzDreherService satzDreherService;
 
 	@Inject
-	public Abfrage(ISatzDreherService satzDreherService) {
+	public Abfrage(IObjectMapperService objectMapperService, ISatzDreherService satzDreherService) {
+		this.objectMapperService = objectMapperService;
 		this.satzDreherService = satzDreherService;
 	}
 
+	/**
+	 * This is a test function, to test if the service can answer.
+	 * @return a String
+	 */
 	@GET
 	@Path("test")
 	@Produces(MediaType.TEXT_HTML)
@@ -47,7 +49,7 @@ public class Abfrage {
 		Bean bean = new Bean();
 		bean.setSatz(satz);
 		LOGGER.debug("getHello() was called with parameter '" + satz + "' and returned a bean");
-		return createJsonString(bean);
+		return objectMapperService.createJsonString(bean);
 	}
 
 	@GET
@@ -55,23 +57,8 @@ public class Abfrage {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHello2(@QueryParam("sentence") final String satz) {
 		Bean bean = new Bean();
-		bean.setSatz(satz);
 		bean.setSatz(satzDreherService.satzDrehen(satz));
 		LOGGER.debug("getHello2() was called with parameter '" + satz + "' and returned a bean");
-		return createJsonString(bean);
+		return objectMapperService.createJsonString(bean);
 	}
-
-	private String createJsonString(final Object list) {
-		String jsonString = "";
-		try {
-			jsonString = OBJECT_MAPPER.writer().writeValueAsString(list);
-		}
-		catch (final Exception e) {
-			LOGGER.warn("Could not serialize bean into JSON string", e);
-			return "";
-		}
-
-		return jsonString;
-	}
-
 }
