@@ -96,10 +96,10 @@
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
-		<!-- Sentences und dessen dependencies -->
+		<!-- Sentence-Services und dessen dependencies -->
 		<dependency>
 			<groupId>org.lla-private</groupId>
-			<artifactId>Sentences</artifactId>
+			<artifactId>Sentence-services</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
 
