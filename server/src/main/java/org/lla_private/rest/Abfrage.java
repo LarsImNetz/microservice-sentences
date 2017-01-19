@@ -7,13 +7,13 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import org.lla_private.bean.Bean;
+import org.lla_private.bean.ResponseBean;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-@Path("/abfrage")
+@Path("/satz")
 public class Abfrage {
 
 	private static Logger LOGGER = LoggerFactory.getLogger(Abfrage.class);
@@ -39,27 +39,49 @@ public class Abfrage {
 		return "Just a test";
 	}
 
-	// TODO: Values per Parameter hineinreichen
-	//http://server/abfrage/hello?sentence=Hello%20World
-	// sample:
-	// http://localhost:8080/sentences-rest-server/abfrage/hello?sentence=Besucheransturm
+	/**
+	 * Satz manipulieren nothing()
+	 * 
+	 *  Der übergebene Satz wird nur zurückgegeben und nicht manipuliert
+	 *  http://server/satz/nothing?sentence=Hello%20World
+	 *  
+	 * sample:
+	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
+   *
+	 * @param satz als Parameter ?sentence=<satz>
+	 * @return json String {satz: "<satz>"}
+	 */
+	//
 	@GET
-	@Path("hello")
+	@Path("nothing")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getHello(@QueryParam("sentence") final String satz) {
-		Bean bean = new Bean();
+	public String satzDoNothing(@QueryParam("sentence") final String satz) {
+		ResponseBean bean = new ResponseBean();
 		bean.setSatz(satz);
-		LOGGER.debug("getHello() was called with parameter '" + satz + "' and returned a bean");
+		LOGGER.debug("satzDoNothing() was called with parameter '" + satz + "' and returned a bean");
 		return objectMapperService.createJsonString(bean);
 	}
 
+	/**
+	 * Satz manipulieren nothing()
+	 * 
+	 *  Der übergebene Satz wird mit dem BuchstabenImSatzVerdrehenService manipuliert
+	 *  http://server/satz/nothing?sentence=Hello%20World
+	 *  
+	 * sample:
+	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
+   *
+	 * @param satz als Parameter ?sentence=<satz>
+	 * @return json String {satz: "<satz>"}
+	 */
+	//
 	@GET
-	@Path("hello2")
+	@Path("verdrehen")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String getHello2(@QueryParam("sentence") final String satz) {
-		Bean bean = new Bean();
+	public String satzVerdrehen(@QueryParam("sentence") final String satz) {
+		ResponseBean bean = new ResponseBean();
 		bean.setSatz(satzDreherService.verdrehen(satz));
-		LOGGER.debug("getHello2() was called with parameter '" + satz + "' and returned a bean");
+		LOGGER.debug("satzVerdrehen() was called with parameter '" + satz + "' and returned a bean");
 		return objectMapperService.createJsonString(bean);
 	}
 }

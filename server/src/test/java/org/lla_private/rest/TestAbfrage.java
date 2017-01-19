@@ -32,7 +32,7 @@ public class TestAbfrage {
 	public void testAbfrageHello() {
 		Mockito.when(objectMapperService.createJsonString(Mockito.any())).thenReturn("a json string");
 
-		String value = abfrageSUT.getHello("satz");
+		String value = abfrageSUT.satzVerdrehen("satz");
 		System.out.println(value);
 		Assert.assertEquals("a json string", value);
 	}
