@@ -3,9 +3,8 @@ package org.lla_private.bean;
 import java.io.Serializable;
 
 @SuppressWarnings("serial")
-public class Bean implements Serializable {
+public class ResponseBean implements Serializable {
 
-	// TODO: sollte jetzt Sentences nutzen können
 	String satz;
 
 	public String getSatz() {
@@ -34,7 +33,7 @@ public class Bean implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Bean other = (Bean) obj;
+		ResponseBean other = (ResponseBean) obj;
 		if (satz == null) {
 			if (other.satz != null)
 				return false;

@@ -6,14 +6,14 @@ import org.apache.commons.lang3.SerializationUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.Assert;
 import org.junit.Test;
-import org.lla_private.bean.Bean;
+import org.lla_private.bean.ResponseBean;
 import org.skyscreamer.jsonassert.JSONAssert;
 
-public class TestBean {
+public class TestResponseBean {
 
 	@Test
 	public void testSerializeBaugeldAntrag() {
-		Bean bean = new Bean();
+		ResponseBean bean = new ResponseBean();
 		bean.setSatz("Aber ein A");
 
 		final Serializable original = bean;
@@ -21,13 +21,13 @@ public class TestBean {
 
 		Assert.assertEquals(original, copy);
 
-		Bean copyOfBean = (Bean) copy;
+		ResponseBean copyOfBean = (ResponseBean) copy;
 		Assert.assertEquals("Aber ein A", copyOfBean.getSatz());
 	}
 
 	@Test
 	public void testJsonBean() throws Exception {
-		Bean bean = new Bean();
+		ResponseBean bean = new ResponseBean();
 		bean.setSatz("Aber ein A");
 
 		final String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(bean);
