@@ -22,7 +22,7 @@ public class TestBean {
 		Assert.assertEquals(original, copy);
 
 		Bean copyOfBean = (Bean) copy;
-		Assert.assertEquals("Aebr ein A", copyOfBean.getSatz());
+		Assert.assertEquals("Aber ein A", copyOfBean.getSatz());
 	}
 
 	@Test
@@ -31,6 +31,6 @@ public class TestBean {
 		bean.setSatz("Aber ein A");
 
 		final String json = new ObjectMapper().writerWithDefaultPrettyPrinter().writeValueAsString(bean);
-		JSONAssert.assertEquals("{'satz': 'Aebr ein A'}", json, false);
+		JSONAssert.assertEquals("{'satz': 'Aber ein A'}", json, false);
 	}
 }
