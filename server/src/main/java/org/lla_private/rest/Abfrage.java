@@ -9,7 +9,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.lla_private.bean.Bean;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
-import org.lla_private.service.satzdreher.ISatzDreherService;
+import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,10 +20,10 @@ public class Abfrage {
 
 	private final IObjectMapperService objectMapperService;
 
-	private final ISatzDreherService satzDreherService;
+	private final IBuchstabenImSatzVerdrehenService satzDreherService;
 
 	@Inject
-	public Abfrage(IObjectMapperService objectMapperService, ISatzDreherService satzDreherService) {
+	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService) {
 		this.objectMapperService = objectMapperService;
 		this.satzDreherService = satzDreherService;
 	}
@@ -58,7 +58,7 @@ public class Abfrage {
 	@Produces(MediaType.APPLICATION_JSON)
 	public String getHello2(@QueryParam("sentence") final String satz) {
 		Bean bean = new Bean();
-		bean.setSatz(satzDreherService.satzDrehen(satz));
+		bean.setSatz(satzDreherService.verdrehen(satz));
 		LOGGER.debug("getHello2() was called with parameter '" + satz + "' and returned a bean");
 		return objectMapperService.createJsonString(bean);
 	}

@@ -4,7 +4,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
-import org.lla_private.service.satzdreher.ISatzDreherService;
+import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
@@ -14,7 +14,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class TestAbfrage {
 
 	@Mock
-	private ISatzDreherService satzDreherService;
+	private IBuchstabenImSatzVerdrehenService satzDreherService;
 	
 	@Mock
 	private IObjectMapperService objectMapperService;
