@@ -3,7 +3,6 @@ package org.lla_private;
 import java.net.URI;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.WebTarget;
 
 import org.junit.Assert;
 import org.junit.Before;

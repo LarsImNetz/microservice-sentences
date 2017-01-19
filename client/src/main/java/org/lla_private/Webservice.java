@@ -5,12 +5,12 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 import javax.ws.rs.client.Client;
-import javax.ws.rs.client.ClientBuilder;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import org.lla_private.IWebservice;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.lla_private.bean.Bean;
+import org.lla_private.bean.ResponseBean;
 import org.lla_private.guice.annotation.WebserviceRestClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,10 +122,10 @@ public class Webservice implements IWebservice {
 		return "decrement";
 	}
 
-	Bean createLarsKontingentBean(final String entityString) {
-		Bean response = null;
+	ResponseBean createLarsKontingentBean(final String entityString) {
+		ResponseBean response = null;
 		try {
-			response = OBJECT_MAPPER.readValue(entityString, Bean.class);
+			response = OBJECT_MAPPER.readValue(entityString, ResponseBean.class);
 		}
 		catch (final IOException e) {
 			LOGGER.warn("Could not generate bean from response string", e);
