@@ -3,6 +3,7 @@ package org.lla_private.rest;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.satzdreher.ISatzDreherService;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;

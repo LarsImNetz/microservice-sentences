@@ -7,8 +7,8 @@ import javax.inject.Inject;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.lla_private.rest.IObjectMapperService;
-import org.lla_private.rest.ObjectMapperService;
+import org.lla_private.rest.json.mapper.IObjectMapperService;
+import org.lla_private.rest.json.mapper.ObjectMapperService;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;

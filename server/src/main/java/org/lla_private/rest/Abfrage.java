@@ -8,6 +8,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
 import org.lla_private.bean.Bean;
+import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.satzdreher.ISatzDreherService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

@@ -1,4 +1,4 @@
-package org.lla_private.rest;
+package org.lla_private.rest.json.mapper;
 
 
 public interface IObjectMapperService {
