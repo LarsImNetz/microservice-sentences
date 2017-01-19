@@ -29,12 +29,13 @@
 
 	<modules>
 		<module>bean</module>
+		<module>mapper</module>
 		<module>server</module>
 		<module>client</module>
-                <module>integration-tests</module>
+		<module>integration-tests</module>
 	</modules>	
 
-		<repositories>
+	<repositories>
 		<repository>
 			<id>Apache Nexus</id>
 			<url>https://repository.apache.org/content/repositories/snapshots/</url>
