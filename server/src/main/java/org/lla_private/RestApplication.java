@@ -31,6 +31,7 @@ public class RestApplication extends Application {
 		final Set<Class<?>> classes = new HashSet<>();
 
 		classes.add(Abfrage.class);
+		classes.add(CORSResponseFilter.class);
 
 		return classes;
 	}

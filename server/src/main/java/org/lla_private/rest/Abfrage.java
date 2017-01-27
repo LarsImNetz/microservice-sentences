@@ -13,7 +13,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.lla_private.bean.ResponseBean;
-import org.lla_private.bean.request.TextRequest;
+import org.lla_private.bean.request.TextRequestDTO;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.slf4j.Logger;
@@ -36,6 +36,7 @@ public class Abfrage {
 
 	/**
 	 * This is a test function, to test if the service can answer.
+	 * 
 	 * @return a String
 	 */
 	@GET
@@ -48,13 +49,14 @@ public class Abfrage {
 	/**
 	 * Satz manipulieren nothing()
 	 * 
-	 *  Der übergebene Satz wird nur zurückgegeben und nicht manipuliert
-	 *  http://server/satz/nothing?sentence=Hello%20World
-	 *  
+	 * Der übergebene Satz wird nur zurückgegeben und nicht manipuliert
+	 * http://server/satz/nothing?sentence=Hello%20World
+	 * 
 	 * sample:
 	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
-   *
-	 * @param satz als Parameter ?sentence=<satz>
+	 *
+	 * @param satz
+	 *          als Parameter ?sentence=<satz>
 	 * @return json String {satz: "<satz>"}
 	 */
 	//
@@ -71,13 +73,14 @@ public class Abfrage {
 	/**
 	 * Satz manipulieren nothing()
 	 * 
-	 *  Der übergebene Satz wird mit dem BuchstabenImSatzVerdrehenService manipuliert
-	 *  http://server/satz/nothing?sentence=Hello%20World
-	 *  
+	 * Der übergebene Satz wird mit dem BuchstabenImSatzVerdrehenService manipuliert
+	 * http://server/satz/nothing?sentence=Hello%20World
+	 * 
 	 * sample:
 	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
-   *
-	 * @param satz als Parameter ?sentence=<satz>
+	 *
+	 * @param satz
+	 *          als Parameter ?sentence=<satz>
 	 * @return json String {satz: "<satz>"}
 	 */
 	//
@@ -96,22 +99,16 @@ public class Abfrage {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String satzManipulieren(String json) throws InterruptedException {
-		Object obj = objectMapperService.createObject(json, TextRequest.class);
-		if (obj instanceof TextRequest) {
-			TextRequest textRequest = (TextRequest)obj;
-		}
 		System.out.println(json);
+
+		String satz = "Hallo angulars";
+
+		Object obj = objectMapperService.createObject(json, TextRequestDTO.class);
+		if (obj instanceof TextRequestDTO) {
+			TextRequestDTO textRequest = (TextRequestDTO) obj;
+			satz = textRequest.getSentence().getSentence();
+		}
 		Thread.sleep(1000);
-		return "{\"text\":\"Hallo angulars\"}";	
-	}
-	
-	@GET
-	@Path("justtest")
-	@Produces(MediaType.APPLICATION_JSON)
-	public Response getPodcastById(String json) throws IOException {
-		return Response.ok() //200
-				.header("Access-Control-Allow-Origin", "*")
-				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
-				.allow("OPTIONS").build();
+		return "{\"text\":\"" + satz + "\"}";
 	}
 }
