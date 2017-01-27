@@ -75,12 +75,29 @@
 		</dependency>
 
 		<!-- JETTY DEPENDENCIES FOR TESTING -->
-		<dependency>
+<!-- 	<dependency>
 			<groupId>org.eclipse.jetty.aggregate</groupId>
 			<artifactId>jetty-all-server</artifactId>
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
+<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+<!--
+ <dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-server</artifactId>
+    <version>8.1.8.v20121106</version>
+</dependency>
+-->
+<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet -->
+<!--
+ <dependency>
+    <groupId>org.eclipse.jetty</groupId>
+    <artifactId>jetty-servlet</artifactId>
+    <version>8.1.8.v20121106</version>
+</dependency>
+-->
 
 		<!-- Rest Bean -->
 		<dependency>
