@@ -1,5 +1,7 @@
 package org.lla_private.rest;
 
+import java.io.IOException;
+
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -8,8 +10,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.lla_private.bean.ResponseBean;
+import org.lla_private.bean.request.TextRequest;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.slf4j.Logger;
@@ -92,8 +96,22 @@ public class Abfrage {
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
 	public String satzManipulieren(String json) throws InterruptedException {
+		Object obj = objectMapperService.createObject(json, TextRequest.class);
+		if (obj instanceof TextRequest) {
+			TextRequest textRequest = (TextRequest)obj;
+		}
 		System.out.println(json);
 		Thread.sleep(1000);
 		return "{\"text\":\"Hallo angulars\"}";	
+	}
+	
+	@GET
+	@Path("justtest")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getPodcastById(String json) throws IOException {
+		return Response.ok() //200
+				.header("Access-Control-Allow-Origin", "*")
+				.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT")
+				.allow("OPTIONS").build();
 	}
 }
