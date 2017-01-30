@@ -111,4 +111,13 @@ public class Abfrage {
 		Thread.sleep(1000);
 		return "{\"text\":\"" + satz + "\"}";
 	}
+
+	/* HINT: @POST oder @GET ist hier pflicht! */
+	@GET
+	@Path("select")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String satzAlgorithmen() {
+		return "{\"algorithms\":[\"verdrehen\"]}";
+	}
+
 }
