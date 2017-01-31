@@ -107,11 +107,14 @@ public class Abfrage {
 			TextRequestDTO textRequest = (TextRequestDTO) obj;
 			satz = textRequest.getSentence().getSentence();
 		}
+		if (satz == null) {
+			satz = "Bitte trage etwas ein...";
+		}
 		Thread.sleep(1000);
 		return "{\"text\":\"" + satz + "\"}";
 	}
 
-	/* HINT: @POST oder @GET ist hier pflicht! */
+	/* HINT: @POST oder @GET ist hier Pflicht! */
 	@GET
 	@Path("select")
 	@Produces(MediaType.APPLICATION_JSON)
