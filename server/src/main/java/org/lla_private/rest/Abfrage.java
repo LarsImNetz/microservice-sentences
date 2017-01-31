@@ -97,7 +97,7 @@ public class Abfrage {
 	@Path("manipulate")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String satzManipulieren(String json) throws InterruptedException {
+	public String satzManipulieren(String json) throws InterruptedException, IllegalArgumentException {
 		System.out.println(json);
 
 		String satz = "Hallo angulars";
@@ -108,7 +108,7 @@ public class Abfrage {
 			satz = textRequest.getSentence().getSentence();
 		}
 		if (satz == null) {
-			satz = "Bitte trage etwas ein...";
+			throw new IllegalArgumentException("Bitte trage etwas ein...");
 		}
 		Thread.sleep(1000);
 		return "{\"text\":\"" + satz + "\"}";
