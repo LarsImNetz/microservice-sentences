@@ -107,7 +107,7 @@ public class Abfrage {
 			TextRequestDTO textRequest = (TextRequestDTO) obj;
 			satz = textRequest.getSentence().getSentence();
 		}
-		if (satz == null) {
+		if (satz == null || satz.isEmpty()) {
 			throw new IllegalArgumentException("Bitte trage etwas ein...");
 		}
 		Thread.sleep(1000);
