@@ -16,6 +16,7 @@ import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.IManipulationMethod;
 import org.lla_private.service.ManipulationMethods.Assoc;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
+import org.lla_private.service.buchstabenzuzahlen.IBuchstabenZuZahlenService;
 import org.lla_private.service.kyrillisch.IBuchstabenImSatzKyrillischService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,13 +34,17 @@ public class Abfrage {
 
 	private final IManipulationMethod manipulationMethod;
 
+	private final IBuchstabenZuZahlenService satzZuZahlenService;
+	
 	@Inject
 	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService,
-			IBuchstabenImSatzKyrillischService kyrillischService, IManipulationMethod manipulationMethod) {
+			IBuchstabenImSatzKyrillischService kyrillischService, IManipulationMethod manipulationMethod,
+			IBuchstabenZuZahlenService buchstabenZuZahlenService) {
 		this.objectMapperService = objectMapperService;
 		this.satzDreherService = satzDreherService;
 		this.satzKyrillischService = kyrillischService;
 		this.manipulationMethod = manipulationMethod;
+		this.satzZuZahlenService = buchstabenZuZahlenService;
 	}
 
 	/**
@@ -139,6 +144,8 @@ public class Abfrage {
 			return satzDreherService.verdrehen(satz);
 		case "kyrillisch":
 			return satzKyrillischService.convert(satz);
+		case "zuZahlen":
+			return satzZuZahlenService.convert(satz);
 		default:
 			break;
 		}
