@@ -89,6 +89,12 @@
 			<version>${jackson.fasterxml.version}</version>
 		</dependency>
 
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-annotations</artifactId>
+			<version>${jackson.fasterxml.version}</version>
+		</dependency>
+
 		<!-- JSONassert -->
 		<dependency>
 			<groupId>org.skyscreamer</groupId>
