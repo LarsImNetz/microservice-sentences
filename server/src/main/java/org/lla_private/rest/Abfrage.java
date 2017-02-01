@@ -8,6 +8,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import org.lla_private.bean.ResponseBean;
 import org.lla_private.bean.request.TextRequestDTO;
@@ -15,6 +16,7 @@ import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.ManipulationMethods;
 import org.lla_private.service.ManipulationMethods.Assoc;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
+import org.lla_private.service.kyrillisch.IBuchstabenImSatzKyrillischService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,10 +29,13 @@ public class Abfrage {
 
 	private final IBuchstabenImSatzVerdrehenService satzDreherService;
 
+	private final IBuchstabenImSatzKyrillischService satzKyrillischService;
+
 	@Inject
-	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService) {
+	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService, IBuchstabenImSatzKyrillischService kyrillischService) {
 		this.objectMapperService = objectMapperService;
 		this.satzDreherService = satzDreherService;
+		this.satzKyrillischService = kyrillischService;
 	}
 
 	/**
@@ -97,21 +102,45 @@ public class Abfrage {
 	@Path("manipulate")
 	@Consumes(MediaType.APPLICATION_JSON)
 	@Produces(MediaType.APPLICATION_JSON)
-	public String satzManipulieren(String json) throws InterruptedException, IllegalArgumentException {
+	public Response satzManipulieren(String json) throws InterruptedException, IllegalArgumentException {
+		try {
+			String satz = manipulateSatz(json);
+			Thread.sleep(1000);
+			String result = "{\"text\":\"" + satz + "\"}";
+			return Response.ok().entity(result).build();
+		}
+		catch (IllegalArgumentException e) {
+			String result = "{\"message\":\"" + e.getMessage() + "\"}";
+			return Response.status(Response.Status.BAD_REQUEST).entity(result).build();
+		}
+	}
+
+	private String manipulateSatz(String json) {
 		System.out.println(json);
 
 		String satz = "Hallo angulars";
-
+		TextRequestDTO textRequest = null;
+		
 		Object obj = objectMapperService.createObject(json, TextRequestDTO.class);
 		if (obj instanceof TextRequestDTO) {
-			TextRequestDTO textRequest = (TextRequestDTO) obj;
+			textRequest = (TextRequestDTO) obj;
 			satz = textRequest.getSentence().getSentence();
 		}
+
 		if (satz == null || satz.isEmpty()) {
 			throw new IllegalArgumentException("Bitte trage etwas ein...");
 		}
-		Thread.sleep(1000);
-		return "{\"text\":\"" + satz + "\"}";
+		String convertMethod = textRequest.getSentence().getSentenceMethod();
+		switch (convertMethod) {
+			case "verdrehen":
+				return satzDreherService.verdrehen(satz);
+			case "kyrillisch":
+				return satzKyrillischService.convert(satz);
+			default:
+				break;
+		}
+		
+		return satz;
 	}
 
 	/* HINT: @POST oder @GET ist hier Pflicht! */
@@ -127,5 +156,4 @@ public class Abfrage {
 		final Assoc[] items = methods.getMethods();
 		return objectMapperService.createJsonString(items);
 	}
-
 }
