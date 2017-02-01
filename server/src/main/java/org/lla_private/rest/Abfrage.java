@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import org.lla_private.bean.ResponseBean;
 import org.lla_private.bean.request.TextRequestDTO;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
-import org.lla_private.service.ManipulationMethods;
+import org.lla_private.service.IManipulationMethod;
 import org.lla_private.service.ManipulationMethods.Assoc;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.lla_private.service.kyrillisch.IBuchstabenImSatzKyrillischService;
@@ -31,11 +31,15 @@ public class Abfrage {
 
 	private final IBuchstabenImSatzKyrillischService satzKyrillischService;
 
+	private final IManipulationMethod manipulationMethod;
+
 	@Inject
-	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService, IBuchstabenImSatzKyrillischService kyrillischService) {
+	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService,
+			IBuchstabenImSatzKyrillischService kyrillischService, IManipulationMethod manipulationMethod) {
 		this.objectMapperService = objectMapperService;
 		this.satzDreherService = satzDreherService;
 		this.satzKyrillischService = kyrillischService;
+		this.manipulationMethod = manipulationMethod;
 	}
 
 	/**
@@ -60,7 +64,7 @@ public class Abfrage {
 	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
 	 *
 	 * @param satz
-	 *          als Parameter ?sentence=<satz>
+	 *            als Parameter ?sentence=<satz>
 	 * @return json String {satz: "<satz>"}
 	 */
 	//
@@ -77,14 +81,14 @@ public class Abfrage {
 	/**
 	 * Satz manipulieren nothing()
 	 * 
-	 * Der übergebene Satz wird mit dem BuchstabenImSatzVerdrehenService manipuliert
-	 * http://server/satz/nothing?sentence=Hello%20World
+	 * Der übergebene Satz wird mit dem BuchstabenImSatzVerdrehenService
+	 * manipuliert http://server/satz/nothing?sentence=Hello%20World
 	 * 
 	 * sample:
 	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
 	 *
 	 * @param satz
-	 *          als Parameter ?sentence=<satz>
+	 *            als Parameter ?sentence=<satz>
 	 * @return json String {satz: "<satz>"}
 	 */
 	//
@@ -108,8 +112,7 @@ public class Abfrage {
 			Thread.sleep(1000);
 			String result = "{\"text\":\"" + satz + "\"}";
 			return Response.ok().entity(result).build();
-		}
-		catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e) {
 			String result = "{\"message\":\"" + e.getMessage() + "\"}";
 			return Response.status(Response.Status.BAD_REQUEST).entity(result).build();
 		}
@@ -120,7 +123,7 @@ public class Abfrage {
 
 		String satz = "Hallo angulars";
 		TextRequestDTO textRequest = null;
-		
+
 		Object obj = objectMapperService.createObject(json, TextRequestDTO.class);
 		if (obj instanceof TextRequestDTO) {
 			textRequest = (TextRequestDTO) obj;
@@ -132,14 +135,14 @@ public class Abfrage {
 		}
 		String convertMethod = textRequest.getSentence().getSentenceMethod();
 		switch (convertMethod) {
-			case "verdrehen":
-				return satzDreherService.verdrehen(satz);
-			case "kyrillisch":
-				return satzKyrillischService.convert(satz);
-			default:
-				break;
+		case "verdrehen":
+			return satzDreherService.verdrehen(satz);
+		case "kyrillisch":
+			return satzKyrillischService.convert(satz);
+		default:
+			break;
 		}
-		
+
 		return satz;
 	}
 
@@ -148,12 +151,7 @@ public class Abfrage {
 	@Path("select")
 	@Produces(MediaType.APPLICATION_JSON)
 	public String satzAlgorithmen() {
-
-		// TODO: könnte man das registrieren nicht auch im binding machen?
-		ManipulationMethods methods = new ManipulationMethods();
-		methods.registerMethod("verdrehen", "Buchstaben im Satz verdrehen");
-		methods.registerMethod("kyrillisch", "Buchstaben durch Kyrillisch ersetzen");
-		final Assoc[] items = methods.getMethods();
+		final Assoc[] items = manipulationMethod.getMethods();
 		return objectMapperService.createJsonString(items);
 	}
 }
