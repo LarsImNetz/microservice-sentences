@@ -14,6 +14,7 @@ import org.lla_private.bean.ResponseBean;
 import org.lla_private.bean.request.TextRequestDTO;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.IManipulationMethod;
+import org.lla_private.service.IManipulationMethodCaller;
 import org.lla_private.service.ManipulationMethods.Assoc;
 import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
 import org.lla_private.service.buchstabenzuzahlen.IBuchstabenZuZahlenService;
@@ -28,23 +29,16 @@ public class Abfrage {
 
 	private final IObjectMapperService objectMapperService;
 
-	private final IBuchstabenImSatzVerdrehenService satzDreherService;
-
-	private final IBuchstabenImSatzKyrillischService satzKyrillischService;
-
 	private final IManipulationMethod manipulationMethod;
 
-	private final IBuchstabenZuZahlenService satzZuZahlenService;
+	private final IManipulationMethodCaller manipulationMethodCaller;
 	
 	@Inject
-	public Abfrage(IObjectMapperService objectMapperService, IBuchstabenImSatzVerdrehenService satzDreherService,
-			IBuchstabenImSatzKyrillischService kyrillischService, IManipulationMethod manipulationMethod,
-			IBuchstabenZuZahlenService buchstabenZuZahlenService) {
+	public Abfrage(IObjectMapperService objectMapperService, 
+			 IManipulationMethod manipulationMethod, IManipulationMethodCaller manipulationMethodCaller) {
 		this.objectMapperService = objectMapperService;
-		this.satzDreherService = satzDreherService;
-		this.satzKyrillischService = kyrillischService;
 		this.manipulationMethod = manipulationMethod;
-		this.satzZuZahlenService = buchstabenZuZahlenService;
+		this.manipulationMethodCaller = manipulationMethodCaller;
 	}
 
 	/**
@@ -97,15 +91,15 @@ public class Abfrage {
 	 * @return json String {satz: "<satz>"}
 	 */
 	//
-	@GET
-	@Path("verdrehen")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String satzVerdrehen(@QueryParam("sentence") final String satz) {
-		ResponseBean bean = new ResponseBean();
-		bean.setSatz(satzDreherService.verdrehen(satz));
-		LOGGER.debug("satzVerdrehen() was called with parameter '" + satz + "' and returned a bean");
-		return objectMapperService.createJsonString(bean);
-	}
+//	@GET
+//	@Path("verdrehen")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	public String satzVerdrehen(@QueryParam("sentence") final String satz) {
+//		ResponseBean bean = new ResponseBean();
+//		bean.setSatz(satzDreherService.verdrehen(satz));
+//		LOGGER.debug("satzVerdrehen() was called with parameter '" + satz + "' and returned a bean");
+//		return objectMapperService.createJsonString(bean);
+//	}
 
 	@POST
 	@Path("manipulate")
@@ -139,17 +133,8 @@ public class Abfrage {
 			throw new IllegalArgumentException("Bitte trage etwas ein...");
 		}
 		String convertMethod = textRequest.getSentence().getSentenceMethod();
-		switch (convertMethod) {
-		case "verdrehen":
-			return satzDreherService.verdrehen(satz);
-		case "kyrillisch":
-			return satzKyrillischService.convert(satz);
-		case "zuZahlen":
-			return satzZuZahlenService.convert(satz);
-		default:
-			break;
-		}
 
+		satz = manipulationMethodCaller.callAlgorithm(convertMethod, satz);		
 		return satz;
 	}
 
