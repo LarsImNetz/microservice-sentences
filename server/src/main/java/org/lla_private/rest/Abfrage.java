@@ -16,9 +16,6 @@ import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.IManipulationMethod;
 import org.lla_private.service.IManipulationMethodCaller;
 import org.lla_private.service.ManipulationMethods.Assoc;
-import org.lla_private.service.buchstabendreher.IBuchstabenImSatzVerdrehenService;
-import org.lla_private.service.buchstabenzuzahlen.IBuchstabenZuZahlenService;
-import org.lla_private.service.kyrillisch.IBuchstabenImSatzKyrillischService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

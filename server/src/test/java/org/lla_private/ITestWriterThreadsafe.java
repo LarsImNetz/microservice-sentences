@@ -3,8 +3,6 @@ package org.lla_private;
 import java.util.Arrays;
 import java.util.List;
 
-import javax.inject.Inject;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
