@@ -157,9 +157,3 @@ public class Abfrage {
 		return objectMapperService.createJsonString(items);
 	}
 }
-
-
-/* TODO: Testsatz:
- * Jetzt bin ich in der Lage auch die Zahlen mit diesem hübschen Struck-Font aus HTML5 darzustellen. Die Zeichen sehen doch nett aus.
-* 1234567890
- */
