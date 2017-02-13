@@ -38,7 +38,6 @@ public class ObjectMapperService implements IObjectMapperService {
 	 *  @return json string oder ""
 	 */
 	public String createJsonString(final Object list) {
-	//TODO: Irgendwo habe ich auch das gegenstück, muss hier mit rein 
 		String jsonString = "";
 		try {
 			jsonString = OBJECT_MAPPER.writer().writeValueAsString(list);
@@ -62,14 +61,14 @@ public class ObjectMapperService implements IObjectMapperService {
 			return result;
 		}
 		catch (final JsonMappingException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("Error: ", e);
 		}
 		catch (final JsonParseException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("Error: ", e);
 
 		}
 		catch (final IOException e) {
-			LOGGER.error(e.getMessage());
+			LOGGER.error("Error: ", e);
 		}
 		return null;
 	}

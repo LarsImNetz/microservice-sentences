@@ -104,18 +104,24 @@ public class Abfrage {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response satzManipulieren(String json) throws InterruptedException, IllegalArgumentException {
 		try {
+			LOGGER.info("neue Anfrage: manipulate called");
 			String satz = manipulateSatz(json);
 			Thread.sleep(1000);
+			// TODO: Das '\n' ist ein illegales Zeichen?
+			satz = satz.replaceAll("\n", "");
+			
 			String result = "{\"text\":\"" + satz + "\"}";
 			return Response.ok().entity(result).build();
-		} catch (IllegalArgumentException e) {
+		}
+		catch (IllegalArgumentException e) {
+			LOGGER.error("Illegales Argument: ", e);
 			String result = "{\"message\":\"" + e.getMessage() + "\"}";
 			return Response.status(Response.Status.BAD_REQUEST).entity(result).build();
 		}
 	}
 
 	private String manipulateSatz(String json) {
-		System.out.println(json);
+		LOGGER.info(json);
 
 		String satz = "Hallo angulars";
 		TextRequestDTO textRequest = null;
@@ -124,14 +130,21 @@ public class Abfrage {
 		if (obj instanceof TextRequestDTO) {
 			textRequest = (TextRequestDTO) obj;
 			satz = textRequest.getSentence().getSentence();
+			LOGGER.info("Der Satz: " + satz);
 		}
-
+		else {
+			LOGGER.warn("Konnte den Satz nicht aus den Parametern extrahieren.");
+		}
+		
 		if (satz == null || satz.isEmpty()) {
+			LOGGER.warn("Der Satz scheint leer oder nicht vorhanden!");
 			throw new IllegalArgumentException("Bitte trage etwas ein...");
 		}
 		String convertMethod = textRequest.getSentence().getSentenceMethod();
-
+		LOGGER.info("Die convert Methode: " + convertMethod);
+		
 		satz = manipulationMethodCaller.callAlgorithm(convertMethod, satz);		
+		LOGGER.info("Der übersetzte Satz: " + satz);
 		return satz;
 	}
 
@@ -144,3 +157,9 @@ public class Abfrage {
 		return objectMapperService.createJsonString(items);
 	}
 }
+
+
+/* TODO: Testsatz:
+ * Jetzt bin ich in der Lage auch die Zahlen mit diesem hübschen Struck-Font aus HTML5 darzustellen. Die Zeichen sehen doch nett aus.
+* 1234567890
+ */
