@@ -108,7 +108,7 @@ public class Abfrage {
 			String satz = manipulateSatz(json);
 			Thread.sleep(1000);
 			// TODO: Das '\n' ist ein illegales Zeichen?
-			satz = satz.replaceAll("\n", "");
+			satz = satz.replaceAll("\n", " ");
 			
 			String result = "{\"text\":\"" + satz + "\"}";
 			return Response.ok().entity(result).build();
