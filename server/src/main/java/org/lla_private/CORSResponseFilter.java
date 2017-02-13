@@ -17,7 +17,7 @@ final class CORSResponseFilter implements ContainerResponseFilter {
 		MultivaluedMap<String, Object> headers = responseContext.getHeaders();
 
 		final Environment currentEnvironment = Environment.get();
-		if (currentEnvironment == Environment.QA || currentEnvironment == Environment.LOCAL) {
+		if (currentEnvironment == Environment.CORS) {
 			headers.add("Access-Control-Allow-Origin", "*");
 			headers.add("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization, X-Requested-With, X-Auth-Token, Accept");
 			headers.add("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS");
