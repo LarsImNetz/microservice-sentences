@@ -3,19 +3,20 @@
 <log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
 
 	<!-- Konsole -->
-	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+	<appender name="Stdout" class="org.apache.log4j.ConsoleAppender">
 		<layout class="org.apache.log4j.PatternLayout">
 			<param name="ConversionPattern" value="%-5p [%d{ISO8601}] %-26.26c{1} - %m\n" />
 		</layout>
 	</appender>
 
-	<logger name="org.lla-private">
-		<level value="debug" />
+	<logger name="org.lla_private.rest"> <!-- Der Name muss exact passen! -->
+		<level value="INFO" />
+<!--		<appender-ref ref="Stdout" /> Hier nur zusätzliche appender eintragen, sonst kommt die Info doppelt -->
 	</logger>
 
-	<!-- Alles: WARN -->
+	<!-- Alles andere: WARN -->
 	<root>
-		<level value="warn" />
-		<appender-ref ref="stdout" />
+		<level value="WARN" />
+		<appender-ref ref="Stdout" />
 	</root>
 </log4j:configuration>
