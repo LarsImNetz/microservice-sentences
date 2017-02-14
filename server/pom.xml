@@ -75,28 +75,18 @@
 		</dependency>
 
 		<!-- JETTY DEPENDENCIES FOR TESTING -->
-<!-- 	<dependency>
-			<groupId>org.eclipse.jetty.aggregate</groupId>
-			<artifactId>jetty-all-server</artifactId>
-			<version>${jetty.version}</version>
-			<scope>provided</scope>
+		<!-- <dependency> <groupId>org.eclipse.jetty.aggregate</groupId> <artifactId>jetty-all-server</artifactId> 
+			<version>${jetty.version}</version> <scope>provided</scope> </dependency> -->
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-server</artifactId>
+			<version>${jetty9.version}</version>
 		</dependency>
-		-->
-<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-server -->
- <dependency>
-    <groupId>org.eclipse.jetty</groupId>
-    <artifactId>jetty-server</artifactId>
-    <version>${jetty9.version}</version>
-</dependency>
 
-<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet -->
-<!--
- <dependency>
-    <groupId>org.eclipse.jetty</groupId>
-    <artifactId>jetty-servlet</artifactId>
-    <version>8.1.8.v20121106</version>
-</dependency>
--->
+		<!-- https://mvnrepository.com/artifact/org.eclipse.jetty/jetty-servlet -->
+		<!-- <dependency> <groupId>org.eclipse.jetty</groupId> <artifactId>jetty-servlet</artifactId> 
+			<version>8.1.8.v20121106</version> </dependency> -->
 
 		<!-- Rest Bean -->
 		<dependency>
@@ -163,7 +153,6 @@
 			<version>2.5.0-b31</version>
 		</dependency>
 
-
 	</dependencies>
 	<build>
 		<finalName>sentencesrestbeanserver</finalName>
@@ -220,16 +209,16 @@
 				<artifactId>jetty-maven-plugin</artifactId>
 				<version>${jetty9.version}</version>
 				<configuration>
-                                  
-                                  <webApp>
-                                    <contextPath>/sentences-rest-server</contextPath>
-                                  </webApp>
-                                  
-                                  <httpConnector>
-                                    <!--host>localhost</host-->
-                                    <port>9999</port>
-                                  </httpConnector>
-                                   
+
+					<webApp>
+						<contextPath>/sentences-rest-server</contextPath>
+					</webApp>
+
+					<httpConnector>
+						<!--host>localhost</host -->
+						<port>8080</port>
+					</httpConnector>
+
 				</configuration>
 			</plugin>
 			<plugin>

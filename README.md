@@ -13,3 +13,7 @@ Sollte das nicht gehen/antworten, ist vermutlich der Tomcat Service nicht an.
 # Start with jetty
 cd server
 mvn jetty:run
+
+# Infos
+wie setzt man den Port
+* http://stackoverflow.com/questions/25644036/how-to-set-server-port-with-org-eclipse-jettyjetty-maven-plugin
