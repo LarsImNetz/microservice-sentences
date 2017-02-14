@@ -10,3 +10,6 @@ http://moonserver.homenet.org:8080/sentencesrestbeanserver/satz/test
 
 Sollte das nicht gehen/antworten, ist vermutlich der Tomcat Service nicht an.
 
+# Start with jetty
+cd server
+mvn jetty:run

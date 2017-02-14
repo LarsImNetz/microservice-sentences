@@ -75,13 +75,13 @@
 		</dependency>
 
 		<!-- JETTY DEPENDENCIES FOR TESTING -->
-		<dependency>
+<!-- 		<dependency>
 			<groupId>org.eclipse.jetty.aggregate</groupId>
 			<artifactId>jetty-all-server</artifactId>
 			<version>${jetty.version}</version>
 			<scope>provided</scope>
 		</dependency>
-
+ -->
 		<!-- Rest Bean -->
 		<dependency>
 			<groupId>org.lla-private</groupId>
@@ -163,9 +163,9 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
+				<groupId>org.eclipse.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
-				<version>${jetty.version}</version>
+				<version>${jetty9.version}</version>
 				<configuration>
 					<connectors>
 						<connector implementation="org.eclipse.jetty.server.nio.SelectChannelConnector">
