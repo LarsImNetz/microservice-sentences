@@ -17,3 +17,4 @@ mvn jetty:run
 # Infos
 wie setzt man den Port
 * http://stackoverflow.com/questions/25644036/how-to-set-server-port-with-org-eclipse-jettyjetty-maven-plugin
+* https://www.eclipse.org/jetty/download.html
