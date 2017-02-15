@@ -6,14 +6,16 @@ import java.util.List;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.lla_private.rest.json.mapper.IObjectMapperService;
+import org.lla_private.rest.json.mapper.ObjectMapperService;
 
 public class TestJsonCreation {
 
-	private static ObjectMapperHelper OBJECTMAPPER;
+	private static IObjectMapperService OBJECTMAPPER;
 
 	@BeforeClass
 	public static void setUp() {
-		OBJECTMAPPER = new ObjectMapperHelper();
+		OBJECTMAPPER = new ObjectMapperService();
 	}
 
 	@Test
