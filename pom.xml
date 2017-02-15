@@ -31,7 +31,7 @@
 		<module>bean</module>
 		<module>mapper</module>
 		<module>server</module>
-		<module>client</module>
+<!--		<module>client</module> -->
 		<module>integration-tests</module>
 	</modules>	
 
