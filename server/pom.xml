@@ -216,7 +216,7 @@
 
 					<httpConnector>
 						<!--host>localhost</host -->
-						<port>8080</port>
+						<port>8008</port>
 					</httpConnector>
 
 				</configuration>

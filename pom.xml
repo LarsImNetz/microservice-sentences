@@ -34,7 +34,7 @@
 <!--		<module>client</module> -->
 		<module>integration-tests</module>
 	</modules>	
-
+<!--
 	<repositories>
 		<repository>
 			<id>Apache Nexus</id>
@@ -47,5 +47,5 @@
 			</snapshots>
 		</repository>
 	</repositories>
-
+-->
 </project>
