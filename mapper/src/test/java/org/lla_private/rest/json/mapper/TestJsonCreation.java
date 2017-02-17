@@ -63,5 +63,18 @@ public class TestJsonCreation {
 		final String json = OBJECTMAPPER.createJsonString(a);
 		Assert.assertEquals("{\"eins\":2}", json);
 	}
+	
+	@Test
+	public void testClassAgetEins() {
+		final A a = new A(3);
+		Assert.assertEquals(3, a.getEins());
+	}
+
+	@Test
+	public void testClassAsetEins() {
+		final A a = new A(3);
+		a.setEins(1);
+		Assert.assertEquals(1, a.getEins());
+	}
 
 }
