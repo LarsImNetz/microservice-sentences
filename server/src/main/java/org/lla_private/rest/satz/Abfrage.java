@@ -1,4 +1,4 @@
-package org.lla_private.rest;
+package org.lla_private.rest.satz;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
@@ -6,11 +6,9 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import org.lla_private.bean.ResponseBean;
 import org.lla_private.bean.request.TextRequestDTO;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
 import org.lla_private.service.IManipulationMethod;
@@ -38,66 +36,7 @@ public class Abfrage {
 		this.manipulationMethodCaller = manipulationMethodCaller;
 	}
 
-	/**
-	 * This is a test function, to test if the service can answer.
-	 * 
-	 * @return a String
-	 */
-	@GET
-	@Path("test")
-	@Produces(MediaType.TEXT_HTML)
-	public String test() {
-		return "Just a test";
-	}
-
-	/**
-	 * Satz manipulieren nothing()
-	 * 
-	 * Der übergebene Satz wird nur zurückgegeben und nicht manipuliert
-	 * http://server/satz/nothing?sentence=Hello%20World
-	 * 
-	 * sample:
-	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
-	 *
-	 * @param satz
-	 *            als Parameter ?sentence=<satz>
-	 * @return json String {satz: "<satz>"}
-	 */
-	//
-	@GET
-	@Path("nothing")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String satzDoNothing(@QueryParam("sentence") final String satz) {
-		ResponseBean bean = new ResponseBean();
-		bean.setSatz(satz);
-		LOGGER.debug("satzDoNothing() was called with parameter '%s' and returned a bean", satz);
-		return objectMapperService.createJsonString(bean);
-	}
-
-	/**
-	 * Satz manipulieren nothing()
-	 * 
-	 * Der übergebene Satz wird mit dem BuchstabenImSatzVerdrehenService
-	 * manipuliert http://server/satz/nothing?sentence=Hello%20World
-	 * 
-	 * sample:
-	 * http://localhost:8080/sentences-rest-server/satz/nothing?sentence=Besucheransturm
-	 *
-	 * @param satz
-	 *            als Parameter ?sentence=<satz>
-	 * @return json String {satz: "<satz>"}
-	 */
-	//
-//	@GET
-//	@Path("verdrehen")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public String satzVerdrehen(@QueryParam("sentence") final String satz) {
-//		ResponseBean bean = new ResponseBean();
-//		bean.setSatz(satzDreherService.verdrehen(satz));
-//		LOGGER.debug("satzVerdrehen() was called with parameter '" + satz + "' and returned a bean");
-//		return objectMapperService.createJsonString(bean);
-//	}
-
+	// TODO: Umbau, das ein AbfrageJson entgegen genommen wird
 	@POST
 	@Path("manipulate")
 	@Consumes(MediaType.APPLICATION_JSON)

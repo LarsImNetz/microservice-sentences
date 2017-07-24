@@ -1,9 +1,10 @@
-package org.lla_private.rest;
+package org.lla_private.rest.satz;
 
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
+import org.lla_private.rest.satz.Abfrage;
 import org.lla_private.service.IManipulationMethod;
 import org.lla_private.service.IManipulationMethodCaller;
 import org.lla_private.service.ManipulationMethods.Assoc;
@@ -26,24 +27,6 @@ public class TestAbfrage {
 	
 	@InjectMocks
 	private Abfrage abfrageSUT;
-	
-	@Test
-	public void testAbfrageTest() {
-		String value = abfrageSUT.test();
-		Assert.assertEquals("Just a test", value);
-	}
-	
-	@Test
-	public void testSatzDoNothing() {
-		// Weil wir am ende der Funktion den objectMapperService verwenden, müssen wir diesen Mocken
-		Mockito.when(objectMapperService.createJsonString(Mockito.any())).thenReturn("a json string");
-
-		String satz = "Dies ist ein Satz";
-		String response = abfrageSUT.satzDoNothing(satz);
-		
-		Assert.assertNotNull(response);
-		Assert.assertEquals("a json string", response);
-	}
 	
 	@Test
 	public void testSatzAlgorithmen() {

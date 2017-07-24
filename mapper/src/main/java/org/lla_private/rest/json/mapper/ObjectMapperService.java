@@ -18,7 +18,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
  */
 public class ObjectMapperService implements IObjectMapperService {
 
-	private static Logger LOGGER = LoggerFactory.getLogger(ObjectMapperService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(ObjectMapperService.class);
 
 	private final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 

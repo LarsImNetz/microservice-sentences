@@ -11,7 +11,8 @@ import javax.ws.rs.core.Application;
 import org.glassfish.hk2.api.ServiceLocator;
 import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
-import org.lla_private.rest.Abfrage;
+import org.lla_private.rest.satz.Abfrage;
+import org.lla_private.rest.satz.JustTest;
 
 import com.google.inject.Guice;
 
@@ -31,6 +32,7 @@ public class RestApplication extends Application {
 		final Set<Class<?>> classes = new HashSet<>();
 
 		classes.add(Abfrage.class);
+		classes.add(JustTest.class);
 		classes.add(CORSResponseFilter.class);
 
 		return classes;
