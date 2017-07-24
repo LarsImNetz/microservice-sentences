@@ -13,6 +13,8 @@ import org.jvnet.hk2.guice.bridge.api.GuiceBridge;
 import org.jvnet.hk2.guice.bridge.api.GuiceIntoHK2Bridge;
 import org.lla_private.rest.satz.Abfrage;
 import org.lla_private.rest.satz.JustTest;
+import org.lla_private.rest.satz.Nothing;
+import org.lla_private.rest.satz.SelectMethod;
 
 import com.google.inject.Guice;
 
@@ -33,6 +35,8 @@ public class RestApplication extends Application {
 
 		classes.add(Abfrage.class);
 		classes.add(JustTest.class);
+		classes.add(Nothing.class);
+		classes.add(SelectMethod.class);
 		classes.add(CORSResponseFilter.class);
 
 		return classes;

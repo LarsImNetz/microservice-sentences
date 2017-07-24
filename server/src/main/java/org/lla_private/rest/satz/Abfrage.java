@@ -24,15 +24,11 @@ public class Abfrage {
 
 	private final IObjectMapperService objectMapperService;
 
-	private final IManipulationMethod manipulationMethod;
-
 	private final IManipulationMethodCaller manipulationMethodCaller;
 	
 	@Inject
-	public Abfrage(IObjectMapperService objectMapperService, 
-			 IManipulationMethod manipulationMethod, IManipulationMethodCaller manipulationMethodCaller) {
+	public Abfrage(IObjectMapperService objectMapperService, IManipulationMethodCaller manipulationMethodCaller) {
 		this.objectMapperService = objectMapperService;
-		this.manipulationMethod = manipulationMethod;
 		this.manipulationMethodCaller = manipulationMethodCaller;
 	}
 
@@ -87,12 +83,5 @@ public class Abfrage {
 		return satz;
 	}
 
-	/* HINT: @POST oder @GET ist hier Pflicht! */
-	@GET
-	@Path("select")
-	@Produces(MediaType.APPLICATION_JSON)
-	public String satzAlgorithmen() {
-		final Assoc[] items = manipulationMethod.getMethods();
-		return objectMapperService.createJsonString(items);
-	}
+
 }
