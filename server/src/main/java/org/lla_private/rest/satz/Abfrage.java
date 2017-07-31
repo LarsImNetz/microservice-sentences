@@ -65,7 +65,7 @@ public class Abfrage {
 		if (obj instanceof TextRequestDTO) {
 			textRequest = (TextRequestDTO) obj;
 			satz = textRequest.getSentence().getSentence();
-			LOGGER.info("Der Satz: %s", satz);
+			LOGGER.info("Der Satz: {}", satz);
 		}
 		else {
 			LOGGER.warn("Konnte den Satz nicht aus den Parametern extrahieren.");
@@ -76,10 +76,10 @@ public class Abfrage {
 			throw new IllegalArgumentException("Bitte trage etwas ein...");
 		}
 		String convertMethod = textRequest.getSentence().getSentenceMethod();
-		LOGGER.info("Die convert Methode: %s", convertMethod);
+		LOGGER.info("Die convert Methode: {}", convertMethod);
 		
 		satz = manipulationMethodCaller.callAlgorithm(convertMethod, satz);		
-		LOGGER.info("Der übersetzte Satz: %s", satz);
+		LOGGER.info("Der übersetzte Satz: {}", satz);
 		return satz;
 	}
 
