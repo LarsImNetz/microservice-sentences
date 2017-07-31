@@ -35,14 +35,16 @@ public class TestAbfrage {
 
 		Sentence sentence = Mockito.mock(Sentence.class);
 		Mockito.when(sentence.getSentence()).thenReturn("satz");
+		Mockito.when(sentence.getSentenceMethod()).thenReturn("converter");
 		Mockito.when(mock.getSentence()).thenReturn(sentence);
 
+		Mockito.when(manipulationMethodCaller.callAlgorithm("converter", "satz")).thenReturn("converted satz");
 		String json = "json String";
 		// TODO: fertig machen!
-		//		Response response = abfrageSUT.satzManipulieren(json);
+		Response response = abfrageSUT.satzManipulieren(json);
 
-		//	System.out.println(value);
-//		Assert.assertEquals(200, response.getStatus());
+//		System.out.println(response.getStatus());
+		Assert.assertEquals(200, response.getStatus());
 
 	}
 }
