@@ -15,6 +15,7 @@ import org.lla_private.rest.satz.Abfrage;
 import org.lla_private.rest.satz.JustTest;
 import org.lla_private.rest.satz.Nothing;
 import org.lla_private.rest.satz.SelectMethod;
+import org.lla_private.rest.satz.ShowMeMoreText;
 
 import com.google.inject.Guice;
 
@@ -36,6 +37,7 @@ public class RestApplication extends Application {
 		classes.add(Abfrage.class);
 		classes.add(JustTest.class);
 		classes.add(Nothing.class);
+		classes.add(ShowMeMoreText.class);
 		classes.add(SelectMethod.class);
 		classes.add(CORSResponseFilter.class);
 
