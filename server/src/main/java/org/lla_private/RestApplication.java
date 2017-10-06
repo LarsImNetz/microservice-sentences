@@ -40,6 +40,8 @@ public class RestApplication extends Application {
 		classes.add(ShowMeMoreText.class);
 		classes.add(SelectMethod.class);
 		classes.add(CORSResponseFilter.class);
+		classes.add(LogEveryRequestFilter.class);
+
 
 		return classes;
 	}
