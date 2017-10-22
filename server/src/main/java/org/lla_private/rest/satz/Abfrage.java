@@ -2,7 +2,6 @@ package org.lla_private.rest.satz;
 
 import javax.inject.Inject;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -11,9 +10,7 @@ import javax.ws.rs.core.Response;
 
 import org.lla_private.bean.request.TextRequestDTO;
 import org.lla_private.rest.json.mapper.IObjectMapperService;
-import org.lla_private.service.IManipulationMethod;
 import org.lla_private.service.IManipulationMethodCaller;
-import org.lla_private.service.ManipulationMethods.Assoc;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

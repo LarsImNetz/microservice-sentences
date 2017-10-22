@@ -15,7 +15,7 @@ public class JustTest {
 	 */
 	@GET
 	@Path("test")
-	@Produces(MediaType.TEXT_HTML)
+	@Produces(MediaType.TEXT_PLAIN)
 	public String test() {
 		return "Just a test";
 	}
